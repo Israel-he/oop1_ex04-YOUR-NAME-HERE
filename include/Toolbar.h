@@ -14,7 +14,7 @@ public:
 	 
 	int handleClick(int x, int y);
 
-	  
+	  //hhhhhhhghjhgfd
 	
 
 	//void draw(sf::RenderWindow& window);

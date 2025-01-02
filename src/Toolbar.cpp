@@ -11,9 +11,9 @@ Toolbar::Toolbar(sf::Texture pic)
 {
 }
 
- int Toolbar::handleClick(int x, int y)
+int Toolbar::handleClick(int x, int y)
 {
-    
+
     return 0;
 }
 
