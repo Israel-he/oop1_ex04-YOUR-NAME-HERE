@@ -2,20 +2,25 @@
 #include <iostream>
  
 Board::Board(int cols, int  rows)
-	: m_cols(cols),m_rows(rows) 
+	: m_cols(cols), m_rows(rows) 
 {
-    std::cout << "no!!";
+   
     m_robot.loadFromFile("robot.png");
+	//sprite.setTexture(m_robot);
+    
     m_guard.loadFromFile("guard.png");
     m_rock.loadFromFile("rock.PNG");
     m_trash.loadFromFile("trash.png");
     m_Wall.loadFromFile("Wall.PNG");
-    sprite.setTexture(m_robot);
+     
    
-    sprite.setPosition(1.f, 1.f);
+     
     
     iniwindow();
-  
+    initToolbar();
+	/*createToolbar();*/
+	
+   
 }
  
 const bool Board::running() const
@@ -25,45 +30,29 @@ const bool Board::running() const
      
 }
 
-
+//Craete the window
 void Board::iniwindow()
 {
+
     m_videoMode.height = m_rows;;
     m_videoMode.width = m_cols;
 
     m_window.create(m_videoMode, "My first game", sf::Style::Titlebar | sf::Style::Close);
-
-    
+	 
     // m_window.setFramerateLimit(60);
 }
 
-//void Board::creatTool(sf::Vector2f n)
-//{
-//      
-//    m_toolbar.push_back(Toolbar(n));
-//}
-
-void Board::adding_tool()
-{
-    //for (int i = 1; i < 7; i++)
-    //{
-    //    int r = (m_rows / 6) * i;
-    //   r= (float)(m_rows / 6)* i;
-    //    sf::Vector2f num;
-    //    num.x = 0.f;
-    //    num.y = r;
-    //    //to put it in order on the top of the window
-    //     creatTool(num);
-    //}
-}
-
+//update the window
 void Board::update()
 {
-   
     pollEvent();
-   
-    //adding_tool();
 }
+
+//void Board::createToolbar()
+//{
+//    initToolbar();
+//	
+//}
 
 void Board::renderToolbar()
 {
@@ -75,28 +64,19 @@ void Board::renderToolbar()
 
 void Board::initToolbar()
 {
-
-    sf::Vector2f locaition;
-    locaition.x = 0.f;
-    locaition.y = 0.f;
-    for (int i = 0; i < 6; i++)
+    for (float i = 0; i < 5; i++)
     {
-        Toolbar m_tool(picphoto(i));
-       
-        m_tool.putinloc(locaition);
-        m_toolbar.push_back(m_tool);
-        locaition.x += 20.f;
+        m_toolbar.push_back(Toolbar( *picphoto(i), sf::Vector2f(colLocation(i), 0.f)));
+       // m_window.draw(m_toolbar[i].returnsprit());
     }
-    sf::Texture pictuar;
-    
-   
 }
 
 void Board::render()
 {
     m_window.clear(sf::Color::Green);
-    //renderToolbar();
+
     renderToolbar();
+    
     m_window.draw(sprite);
     
     
@@ -128,32 +108,38 @@ void Board::pollEvent()
     }
 }
 
-sf::Texture& Board::picphoto(int index)
-{
-    // TODO: insert return statement here
-}
+ 
 
-sf::Texture& Board::picphoto(int index)
+sf::Texture* Board::picphoto(float index)
 {
-    switch (index)
+    switch ((int)index)
     {
     case  0:
-        return m_robot;
+        return &m_robot;
 
     case  1:
-        return m_guard;
+        return &m_guard;
 
     case  2:
-        return m_Wall;
+        return &m_Wall;
 
     case  3:
-        return  m_trash;
+        return  &m_trash;
 
     case  4:
-        return m_rock;
+        return &m_rock;
+
+    default:
+        return nullptr;
+    }
 }
 
- 
+float Board::colLocation(float index)
+{
+    return ((m_cols / static_cast<float>(6)) * index);
+}
+
+//
 
 
 /////////////////////////////////////////
@@ -180,4 +166,13 @@ sf::Texture& Board::picphoto(int index)
 //
 //void Board::draw(sf::RenderWindow& window)
 //{
+//}
+
+//void Board::drawToolbar()
+//{
+//	for (int i = 0; i < m_toolbar.size(); i++)
+//	{
+//		m_toolbar[i].returnsprit().setPosition(i * 20.f, 0.f);
+//		
+//	}
 //}

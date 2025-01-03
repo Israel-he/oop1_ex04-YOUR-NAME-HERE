@@ -8,13 +8,14 @@ class Toolbar
 {
 public:
 
-	Toolbar(sf::Texture);
-	void putinloc(sf::Vector2f&);
-	sf::Sprite& returnsprit();
 	 
+	Toolbar(sf::Texture& pic,sf::Vector2f loc);
+	void putinloc(sf::Vector2f&);
+	sf::Sprite returnsprit();
+	sf::Sprite create();
 	int handleClick(int x, int y);
 
-	  //hhhhhhhghjhgfd
+ 
 	
 
 	//void draw(sf::RenderWindow& window);
@@ -24,5 +25,5 @@ private:
 	sf::Vector2f m_position;
 
 	sf::Texture& m_pic;
-	sf::Sprite m_sprite;
+	 
 };

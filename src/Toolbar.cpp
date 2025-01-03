@@ -6,10 +6,49 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-Toolbar::Toolbar(sf::Texture pic)
-    :m_pic(pic)
+
+Toolbar::Toolbar(sf::Texture& texture, sf::Vector2f position)
+	:m_pic(texture), m_position(position)
 {
 }
+
+sf::Sprite Toolbar::returnsprit()
+{
+    return create();
+}
+
+
+sf::Sprite Toolbar::create()  
+{
+	auto result = sf::Sprite(m_pic);
+	result.setPosition(m_position);
+	result.setScale(sf::Vector2f(2.f, 2.0f));
+    return result;
+
+	//result.setOrigin(sf::Vector2f(result.getTexture()->getSize() / 2u));
+	
+}
+
+
+
+
+
+
+
+/*
+sf::Sprite MyDraw_07::create() const
+{
+    auto result = sf::Sprite(m_texture);
+    result.setPosition(m_position);
+    result.setRotation(m_rotated ? 90.f : 0.f);
+    result.setOrigin(sf::Vector2f(result.getTexture()->getSize() / 2u));
+    return result;
+}
+*/
+
+
+
+
 
 int Toolbar::handleClick(int x, int y)
 {
@@ -17,18 +56,6 @@ int Toolbar::handleClick(int x, int y)
     return 0;
 }
 
-
-
-void Toolbar::putinloc(sf::Vector2f& loc)
-{
-    m_sprite.setTexture(m_pic);
-    m_sprite.setPosition(loc);
-}
-
-sf::Sprite& Toolbar::returnsprit()
-{
-    return m_sprite;
-}
 
 
 //Toolbar Toolbar::create(sf::Vector2f& place, sf::Texture& pic)
