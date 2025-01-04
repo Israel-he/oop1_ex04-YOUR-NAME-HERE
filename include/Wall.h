@@ -3,17 +3,23 @@
 
 class Wall : public GameObject {
 public:
-    Wall(sf::Vector2f pos) : GameObject('#', pos) {}
+	sf::Texture texture;
+    Wall(sf::Vector2f pos) : GameObject(texture, pos) {}
    
-    void draw(sf::RenderWindow& window) const override {
-        sf::RectangleShape rect(sf::Vector2f(50.f, 50.f));
-        rect.setPosition(position);
-        rect.setFillColor(sf::Color::Blue);
-        window.draw(rect);
-    }
+	
+	void draw(sf::RenderWindow& window) override {
+		sf::Sprite sprite = create();
+		window.draw(sprite);
+	}
+    
 };
 
-
+/*
+void draw(sf::RenderWindow& window)   {
+		sf::Sprite sprite;
+		sprite.setTexture(texture);
+		window.draw(sprite);
+	}*/
 
 
 

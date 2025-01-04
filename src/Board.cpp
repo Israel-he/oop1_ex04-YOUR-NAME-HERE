@@ -2,6 +2,7 @@
 #include "Wall.h"
 
 #include <iostream>
+const int N = 50;
  
 Board::Board(int cols, int rows)
     : m_cols(cols), m_rows(rows)
@@ -17,8 +18,9 @@ Board::Board(int cols, int rows)
             // אם אנחנו בקצוות (שורה או עמודה ראשונה/אחרונה), נניח Wall
             if (i == 0 || j == 0 || i == rows - 1 || j == cols - 1) {
                 // אנחנו מכניסים את האובייקט ישירות למערך
+              
                 m_board[i][j] = std::make_unique<Wall>(sf::Vector2f(j * 50, i * 50));
-
+				m_board[i][j]->draw(m_window);
             }
             else {
                 m_board[i][j] = nullptr; // המערך יישאר ריק במרכז

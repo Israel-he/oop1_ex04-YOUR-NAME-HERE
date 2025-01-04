@@ -8,17 +8,20 @@
 class GameObject {
 protected:
     char type; // סוג האובייקט (קיר, רובוט וכו')
-    sf::Vector2f position; // מיקום האובייקט בלוח (x, y)
+    sf::Vector2f m_position; // מיקום האובייקט בלוח (x, y)
+	sf::Texture& m_texture;
+
 
 public:
-    GameObject(char t, sf::Vector2f pos) : type(t), position(pos) {}
-    virtual ~GameObject() = default;
+    GameObject(sf::Texture& pic, sf::Vector2f pos);
+    
 
-    virtual void draw(sf::RenderWindow& window ) const=0;
-
+    virtual void draw(sf::RenderWindow& window );
+    sf::Sprite& create();
+	 
     char getType() const { return type; }
-    sf::Vector2f getPosition() const { return position; }
-    void setPosition(const sf::Vector2f& pos) { position = pos; }
+    sf::Vector2f getPosition() const { return m_position; }
+    void setPosition(const sf::Vector2f& pos) { m_position = pos; }
 };
 
 
