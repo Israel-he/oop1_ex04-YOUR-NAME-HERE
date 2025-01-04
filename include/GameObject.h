@@ -14,7 +14,7 @@ public:
     GameObject(char t, sf::Vector2f pos) : type(t), position(pos) {}
     virtual ~GameObject() = default;
 
-    virtual void draw(sf::RenderWindow& window) const = 0;
+    virtual void draw(sf::RenderWindow& window ) const=0;
 
     char getType() const { return type; }
     sf::Vector2f getPosition() const { return position; }

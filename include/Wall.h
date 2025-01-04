@@ -1,10 +1,10 @@
-#include "GameObject.h" 
+
 
 
 class Wall : public GameObject {
 public:
     Wall(sf::Vector2f pos) : GameObject('#', pos) {}
-
+   
     void draw(sf::RenderWindow& window) const override {
         sf::RectangleShape rect(sf::Vector2f(50.f, 50.f));
         rect.setPosition(position);

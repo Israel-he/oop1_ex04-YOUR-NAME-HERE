@@ -1,8 +1,9 @@
 #include "GameObject.h"
 #include <vector>
 #include <string>
-
 #include "Toolbar.h"
+
+
 class Board
 {
 public:
@@ -24,6 +25,7 @@ public:
 	//Render the window
 	void render();
 
+	//void initBoard();
 	//void creatTool(sf::Vector2f n);
 	//void adding_tool();
 	//void initTextures();
@@ -47,6 +49,9 @@ private:
 	sf::Texture m_Wall;
 	sf::Texture m_trash;
 	sf::Texture m_rock;
+
+	// טבלה דו-ממדית לאובייקטים בלוח
+	std::vector<std::vector<std::unique_ptr<GameObject>>> m_board;
 
 	//Sprites
 	sf::Sprite sprite;
