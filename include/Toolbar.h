@@ -11,16 +11,17 @@ public:
 	 
 	Toolbar(sf::Texture& pic,sf::Vector2f loc);
 	void putinloc(sf::Vector2f&);
-	sf::Sprite returnsprit();
+	sf::Sprite returnSprit();
 	sf::Sprite create();
-	int handleClick(int x, int y);
-
- 
+	bool handleClick(int x, int y);
+	void setIsPressed(bool isPressed);
+	bool getIsPressed();
+	sf::Texture& getTexture() { return m_pic; };//const
 	
-
 	//void draw(sf::RenderWindow& window);
 
 private:
+	bool m_isPressed;
 	sf::RectangleShape enemy;
 	sf::Vector2f m_position;
 

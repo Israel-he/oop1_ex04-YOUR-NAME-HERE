@@ -1,18 +1,18 @@
 
-
-
-class Wall : public GameObject {
-public:
-	sf::Texture texture;
-    Wall(sf::Vector2f pos) : GameObject(texture, pos) {}
-   
-	
-	void draw(sf::RenderWindow& window) override {
-		sf::Sprite sprite = create();
-		window.draw(sprite);
-	}
-    
-};
+//
+//
+//class Wall : public GameObject {
+//public:
+//	sf::Texture texture;
+//    Wall(sf::Vector2f pos) : GameObject(texture, pos) {}
+//   
+//	
+//	void draw(sf::RenderWindow& window) override {
+//		sf::Sprite sprite = create();
+//		window.draw(sprite);
+//	}
+//    
+//};
 
 /*
 void draw(sf::RenderWindow& window)   {

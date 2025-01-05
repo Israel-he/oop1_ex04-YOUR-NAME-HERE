@@ -6,22 +6,22 @@
 #include <SFML/Network.hpp>
 
 class GameObject {
-protected:
-    char type; // סוג האובייקט (קיר, רובוט וכו')
+private:
+    
     sf::Vector2f m_position; // מיקום האובייקט בלוח (x, y)
 	sf::Texture& m_texture;
 
 
+     
 public:
     GameObject(sf::Texture& pic, sf::Vector2f pos);
     
 
-    virtual void draw(sf::RenderWindow& window );
+    void draw(sf::RenderWindow& window );
     sf::Sprite& create();
-	 
-    char getType() const { return type; }
+
     sf::Vector2f getPosition() const { return m_position; }
-    void setPosition(const sf::Vector2f& pos) { m_position = pos; }
+   // void setPosition(const sf::Vector2f& pos) { m_position = pos; }
 };
 
 

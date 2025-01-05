@@ -5,14 +5,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <iostream>
 
 
 Toolbar::Toolbar(sf::Texture& texture, sf::Vector2f position)
-	:m_pic(texture), m_position(position)
+	:m_pic(texture), m_position(position), m_isPressed(false)
 {
 }
 
-sf::Sprite Toolbar::returnsprit()
+sf::Sprite Toolbar::returnSprit()
 {
     return create();
 }
@@ -24,8 +25,6 @@ sf::Sprite Toolbar::create()
 	result.setPosition(m_position);
 	result.setScale(sf::Vector2f(2.f, 2.0f));
     return result;
-
-	//result.setOrigin(sf::Vector2f(result.getTexture()->getSize() / 2u));
 	
 }
 
@@ -50,10 +49,26 @@ sf::Sprite MyDraw_07::create() const
 
 
 
-int Toolbar::handleClick(int x, int y)
+bool Toolbar::handleClick(int x, int y)
 {
+	std::cout << "fjjjjjj \n";
+	if (create().getGlobalBounds().contains(x, y))
+	{
+		return true;
+	
+	}
 
-    return 0;
+    return false;
+}
+
+void Toolbar::setIsPressed(bool isPressed)
+{
+	m_isPressed = isPressed;
+}
+
+bool Toolbar::getIsPressed()
+{
+     return m_isPressed; 
 }
 
 

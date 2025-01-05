@@ -7,35 +7,32 @@
 class Board
 {
 public:
-	Board(int cols = 800, int  rows = 800);
+	//Constructor
+	Board(int cols = 800, int  rows = 800);//
 
 	const bool running() const;
 
     //Build the window
 	void iniwindow();
 
-	//draw the toolbar in side the window
-    //void  drawToolbar();
+ 
 
 	//Update the window
 	void update();
 	 
 	void pollEvent();
-
+	bool checkIfToolbarClicked(sf::Vector2f loc);
 	//Render the window
 	void render();
 
-	//void initBoard();
-	//void creatTool(sf::Vector2f n);
-	//void adding_tool();
-	//void initTextures();
-	
-	void createToolbar();
+	//Render the toolbar
 	void renderToolbar();
 	void initToolbar();
 	
+	void addObject(sf::Texture& ,sf::Vector2f);
 	sf::Texture* picphoto(float index);
 	float colLocation(float index);
+	void drow(sf::RenderWindow& window);
 private:
 
 	//Window
@@ -50,8 +47,9 @@ private:
 	sf::Texture m_trash;
 	sf::Texture m_rock;
 
-	// טבלה דו-ממדית לאובייקטים בלוח
-	std::vector<std::vector<std::unique_ptr<GameObject>>> m_board;
+	sf::Texture m_need2add;
+	// טבלה חד-ממדית לאובייקטים בלוח
+	std::vector<GameObject> m_board;
 
 	//Sprites
 	sf::Sprite sprite;

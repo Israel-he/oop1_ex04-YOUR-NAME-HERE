@@ -5,20 +5,20 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#include <Toolbar.h>
+ 
     
  
 
+ 
+
 GameObject::GameObject(sf::Texture& pic, sf::Vector2f pos)
-	: m_texture(pic), m_position(pos)
+	:m_position(pos), m_texture(pic)
 {
 }
 
 void GameObject::draw(sf::RenderWindow& window)
 {
-    sf::Sprite sprite;
-    sprite.setTexture(m_texture);
-    window.draw(sprite);
+    window.draw(create());
 }
 
 sf::Sprite& GameObject::create()

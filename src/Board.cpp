@@ -1,36 +1,14 @@
 #include "Board.h"
-#include "Wall.h"
+ 
 
 #include <iostream>
+ 
 const int N = 50;
  
 Board::Board(int cols, int rows)
     : m_cols(cols), m_rows(rows)
 {
-
-    m_board.resize(rows);
-    for (int i = 0; i < rows; ++i) {
-        m_board[i].resize(cols);  // מאתחל את השורות
-    }
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            // אם אנחנו בקצוות (שורה או עמודה ראשונה/אחרונה), נניח Wall
-            if (i == 0 || j == 0 || i == rows - 1 || j == cols - 1) {
-                // אנחנו מכניסים את האובייקט ישירות למערך
-              
-                m_board[i][j] = std::make_unique<Wall>(sf::Vector2f(j * 50, i * 50));
-				m_board[i][j]->draw(m_window);
-            }
-            else {
-                m_board[i][j] = nullptr; // המערך יישאר ריק במרכז
-            }
-        }
-    }
-
     m_robot.loadFromFile("robot.png");
-    //sprite.setTexture(m_robot);
-
     m_guard.loadFromFile("guard.png");
     m_rock.loadFromFile("rock.PNG");
     m_trash.loadFromFile("trash.png");
@@ -64,6 +42,7 @@ void Board::iniwindow()
 void Board::update()
 {
     pollEvent();
+    
 }
 
 //void Board::createToolbar()
@@ -76,7 +55,7 @@ void Board::renderToolbar()
 {
     for (int i = 0; i < m_toolbar.size(); i++)
     {
-        m_window.draw(m_toolbar[i].returnsprit());
+        m_window.draw(m_toolbar[i].returnSprit());
     }
 }
 
@@ -94,15 +73,29 @@ void Board::render()
     m_window.clear(sf::Color::Green);
 
     renderToolbar();
-    
-    m_window.draw(sprite);
+	drow(m_window);
+    //m_window.draw(sprite);
     
     
     m_window.display();
 }
 
 
-
+bool  Board::checkIfToolbarClicked(sf::Vector2f loc)
+{
+    std::cout << "in function \n";
+    for (int i = 0; i < m_toolbar.size(); i++)// m_toolbar.size()
+    {
+        if ( m_toolbar[i].handleClick(loc.x, loc.y))
+        {
+            m_toolbar[i].setIsPressed(true);
+			return true;
+			m_need2add = m_toolbar[i].getTexture();
+            std::cout << "found in toolbar \n";
+        }
+    }
+	return false;   
+}
 
 void Board::pollEvent()
 {
@@ -114,19 +107,53 @@ void Board::pollEvent()
             m_window.close();
             break;
 
-   /*     case sf::Event::MouseButtonReleased:
-            if (ev.key.code == sf::Mouse::Right)
-                m_window.draw(sprite);
-            break;*/
+        case sf::Event::MouseButtonReleased:
+            if (ev.key.code == sf::Mouse::Left)
+            {
+                auto loc = m_window.mapPixelToCoords(sf::Vector2i(ev.mouseButton.x, ev.mouseButton.y));
+                if (checkIfToolbarClicked(loc))
+                {
+
+                    while (m_window.pollEvent(ev))
+                    {
+                        if (ev.type == sf::Event::Closed)
+                        {
+                            m_window.close();
+                            return;
+                        }
+                        else if (ev.type == sf::Event::MouseButtonReleased)
+                        {
+                            loc = m_window.mapPixelToCoords(sf::Vector2i(ev.mouseButton.x, ev.mouseButton.y));
+
+
+                            if (!checkIfToolbarClicked(loc))
+                            {
+                                addObject(m_need2add, loc);
+
+                            }
+                            else if (checkIfToolbarClicked(loc))
+                                return;
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            break;
 
 
 
-
-        }
-    }
+        }  
+    }  
 }
 
  
+
+void Board::addObject(sf::Texture& pic, sf::Vector2f loc)
+{
+	m_board.push_back(GameObject(pic, loc));
+}
 
 sf::Texture* Board::picphoto(float index)
 {
@@ -155,6 +182,13 @@ sf::Texture* Board::picphoto(float index)
 float Board::colLocation(float index)
 {
     return ((m_cols / static_cast<float>(6)) * index);
+}
+void Board::drow(sf::RenderWindow& window)
+{
+	for (int i = 0; i < m_board.size(); i++)
+	{
+		m_board[i].draw(window);
+	}
 }
 //
 //void initBoard(int rows, int cols) {
