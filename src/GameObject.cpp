@@ -21,15 +21,13 @@ void GameObject::draw(sf::RenderWindow& window)
     window.draw(create());
 }
 
-sf::Sprite& GameObject::create()
+sf::Sprite GameObject::create()
 {
 
     auto result = sf::Sprite(m_texture);
     result.setPosition(m_position);
-    result.setScale(sf::Vector2f(2.f, 2.0f));
+    //result.setScale(sf::Vector2f(2.f, 2.0f));
     return result;
-
-    
 }
  
     

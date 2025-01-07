@@ -7,11 +7,15 @@
 #include <SFML/Network.hpp>
 #include <iostream>
 
-
-Toolbar::Toolbar(sf::Texture& texture, sf::Vector2f position)
-	:m_pic(texture), m_position(position), m_isPressed(false)
+Toolbar::Toolbar(sf::Texture& pic, sf::Vector2f loc,enum State type)
+	:m_pic(pic), m_position(loc), m_isPressed(false),m_type(type)
 {
 }
+
+//Toolbar::Toolbar(sf::Texture& texture, sf::Vector2f position)
+//	:m_pic(texture), m_position(position), m_isPressed(false)
+//{
+//}
 
 sf::Sprite Toolbar::returnSprit()
 {
@@ -55,9 +59,7 @@ bool Toolbar::handleClick(int x, int y)
 	if (create().getGlobalBounds().contains(x, y))
 	{
 		return true;
-	
 	}
-
     return false;
 }
 
@@ -69,6 +71,11 @@ void Toolbar::setIsPressed(bool isPressed)
 bool Toolbar::getIsPressed()
 {
      return m_isPressed; 
+}
+
+State Toolbar::getType()
+{
+	return  m_type;
 }
 
 

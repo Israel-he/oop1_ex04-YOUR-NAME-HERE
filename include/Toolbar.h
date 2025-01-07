@@ -8,23 +8,24 @@ class Toolbar
 {
 public:
 
-	 
-	Toolbar(sf::Texture& pic,sf::Vector2f loc);
+	Toolbar(sf::Texture& texture);
+	Toolbar(sf::Texture& pic,sf::Vector2f loc,enum State type);
 	void putinloc(sf::Vector2f&);
 	sf::Sprite returnSprit();
 	sf::Sprite create();
 	bool handleClick(int x, int y);
 	void setIsPressed(bool isPressed);
+	void setTexture(sf::Texture& pic) { m_pic = pic; }
 	bool getIsPressed();
 	sf::Texture& getTexture() { return m_pic; };//const
-	
+	State getType();
 	//void draw(sf::RenderWindow& window);
 
 private:
 	bool m_isPressed;
-	sf::RectangleShape enemy;
+	 
 	sf::Vector2f m_position;
 
 	sf::Texture& m_pic;
-	 
+	State m_type;
 };

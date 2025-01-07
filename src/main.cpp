@@ -6,10 +6,11 @@ int main()
     Board board;
 
     while (board.running())
-    {
+    {    
+        board.render();
         board.update();
 
-        board.render();
+
 
     }
 }

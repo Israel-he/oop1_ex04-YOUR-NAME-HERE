@@ -8,7 +8,7 @@ class Board
 {
 public:
 	//Constructor
-	Board(int cols = 800, int  rows = 800);//
+	Board(int cols = 800, int  rows = 800);
 
 	const bool running() const;
 
@@ -21,16 +21,24 @@ public:
 	void update();
 	 
 	void pollEvent();
-	bool checkIfToolbarClicked(sf::Vector2f loc);
+	bool checkAndHandleIfToolbarClicked(sf::Vector2f loc);
 	//Render the window
 	void render();
 
 	//Render the toolbar
 	void renderToolbar();
 	void initToolbar();
+
+	sf::Vector2f  getLoc(sf::Vector2f loc);
+
+	
+
+
+
+
 	
 	void addObject(sf::Texture& ,sf::Vector2f);
-	sf::Texture* picphoto(float index);
+	sf::Texture* picphoto(enum State);
 	float colLocation(float index);
 	void drow(sf::RenderWindow& window);
 private:
@@ -46,8 +54,10 @@ private:
 	sf::Texture m_Wall;
 	sf::Texture m_trash;
 	sf::Texture m_rock;
-
-	sf::Texture m_need2add;
+	State m_state;
+	//Toolbar m_empty;
+	//
+//	 Toolbar& m_need2add;//change to tollbar
 	// טבלה חד-ממדית לאובייקטים בלוח
 	std::vector<GameObject> m_board;
 
@@ -68,7 +78,16 @@ private:
 
 
 
+	enum  State
+	{
+		robot = 0,
+		guard = 1,
+		Wall = 2,
+		trash = 3,
+		rock = 4,
 
+		Erase = 5
+	};
 
 
 

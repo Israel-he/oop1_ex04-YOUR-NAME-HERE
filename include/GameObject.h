@@ -18,7 +18,7 @@ public:
     
 
     void draw(sf::RenderWindow& window );
-    sf::Sprite& create();
+    sf::Sprite create();
 
     sf::Vector2f getPosition() const { return m_position; }
    // void setPosition(const sf::Vector2f& pos) { m_position = pos; }
