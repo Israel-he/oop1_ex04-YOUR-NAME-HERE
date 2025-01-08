@@ -9,6 +9,11 @@
 
  
 
+Toolbar::Toolbar(sf::Texture& pic)
+     :m_pic(pic)
+{
+}
+
 Toolbar::Toolbar(sf::Texture& pic, sf::Vector2f loc,bool mode)
 	:m_pic(pic), m_position(loc), m_isPressed(mode)
 {

@@ -9,7 +9,7 @@ class Toolbar
 public:
 
 	 
-	 
+	Toolbar(sf::Texture& pic);
 	Toolbar(sf::Texture& pic,sf::Vector2f loc, bool mode= false);
 	sf::Sprite returnSprit();
 	sf::Sprite create();

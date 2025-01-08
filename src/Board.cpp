@@ -1,12 +1,9 @@
-
-
 #include "Board.h"
 #include <iostream>
  
  
- 
 Board::Board(int cols, int rows)
-    : m_cols(cols), m_rows(rows), m_need2add(picphoto(5), sf::Vector2f(0.f, 0.f), false)
+    : m_cols(cols), m_rows(rows), m_need2add((new Toolbar(picphoto(5), sf::Vector2f(0.f, 0.f), false)))
 {
     m_background.loadFromFile("tile.jpg");
     m_robot.loadFromFile("robot.jpg");
@@ -50,7 +47,7 @@ void Board::renderToolbar()
 
 void Board::initToolbar()
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
          m_toolbar.push_back(Toolbar(picphoto(i), sf::Vector2f(colLocation(i), 0.f), false));
     }
@@ -85,9 +82,10 @@ bool  Board::checkAndHandleIfToolbarClicked(sf::Vector2f loc) //add "AndHandle" 
         if ( m_toolbar[i].handleClick(loc.x, loc.y))
         {
             m_toolbar[i].setIsPressed(true);
-            //m_state = m_toolbar[i].getType();
-
-			m_need2add.setTexture(m_toolbar[i].getTexture());
+           /* m_need2add->setTexture(picphoto(5));
+			m_need2add->setTexture(m_toolbar[i].getTexture());
+			*/
+			m_need2add = &m_toolbar[i];
 			//wait to next press to get location
             std::cout << "found in toolbar \n";
             return true;
@@ -114,7 +112,7 @@ void Board::pollEvent()
                 if (!checkAndHandleIfToolbarClicked(loc))
                 {
                     //add for all the enents
-                    addObject(m_need2add.getTexture(), loc);
+                    addObject(m_need2add->getTexture(), loc);
                 }
             }
             break;

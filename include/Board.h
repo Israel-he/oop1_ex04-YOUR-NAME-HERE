@@ -57,7 +57,7 @@ private:
 	//sf::Texture m_empty;
 	std::vector<Toolbar>m_toolbar;
 	
-	Toolbar m_need2add; // the object that need to be added to the board
+	Toolbar* m_need2add; // the object that need to be added to the board
 	
 
 	 // טבלה חד-ממדית לאובייקטים בלוח
