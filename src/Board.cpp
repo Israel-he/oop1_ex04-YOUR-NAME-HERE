@@ -1,21 +1,22 @@
+
+
 #include "Board.h"
 #include <iostream>
  
  
  
 Board::Board(int cols, int rows)
-	: m_cols(cols), m_rows(rows), m_empty(m_Wall), m_need2add(m_empty)
+    : m_cols(cols), m_rows(rows), m_need2add(picphoto(5), sf::Vector2f(0.f, 0.f), false)
 {
+    m_background.loadFromFile("tile.jpg");
     m_robot.loadFromFile("robot.jpg");
     m_guard.loadFromFile("guard.jpg");
     m_rock.loadFromFile("rock.jpg");
     m_trash.loadFromFile("trash.jpg");
     m_Wall.loadFromFile("wall.jpg");
-	
 
     iniwindow();
     initToolbar();
-    /*createToolbar();*/
 }
 
 const bool Board::running() const
@@ -36,8 +37,6 @@ void Board::update()
 {
     pollEvent();
 }
-
- 
  
 
 void Board::renderToolbar()
@@ -51,11 +50,9 @@ void Board::renderToolbar()
 
 void Board::initToolbar()
 {
-    for (float i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
-        
-      
-        m_toolbar.push_back(Toolbar(*picphoto((enum tate)i), sf::Vector2f(colLocation(i), 0.f)),State::guard );
+         m_toolbar.push_back(Toolbar(picphoto(i), sf::Vector2f(colLocation(i), 0.f), false));
     }
 }
 
@@ -80,7 +77,6 @@ void Board::render()
     m_window.display();
 }
 
-
 bool  Board::checkAndHandleIfToolbarClicked(sf::Vector2f loc) //add "AndHandle" to the name
 {
     std::cout << "in function \n";
@@ -89,9 +85,9 @@ bool  Board::checkAndHandleIfToolbarClicked(sf::Vector2f loc) //add "AndHandle" 
         if ( m_toolbar[i].handleClick(loc.x, loc.y))
         {
             m_toolbar[i].setIsPressed(true);
-            m_state = m_toolbar[i].getType();
+            //m_state = m_toolbar[i].getType();
 
-			//m_need2add.setTexture(m_toolbar[i].getTexture());
+			m_need2add.setTexture(m_toolbar[i].getTexture());
 			//wait to next press to get location
             std::cout << "found in toolbar \n";
             return true;
@@ -144,27 +140,32 @@ void Board::addObject(sf::Texture& pic, sf::Vector2f loc)
     std::cout << "add \n";
 }
 
-sf::Texture* Board::picphoto(enum state a)
+
+
+
+sf::Texture& Board::picphoto(int a)
 {
     switch (a)
     {
     case  0:
-        return &m_robot;
+        return m_robot;
 
     case  1:
-        return &m_guard;
+        return m_guard;
 
     case  2:
-        return &m_Wall;
+        return m_Wall;
 
     case  3:
-        return  &m_trash;
+        return  m_trash;
 
     case  4:
-        return &m_rock;
+        return m_rock;
+	case  5:
+		return m_background;
 
     default:
-        return nullptr;
+		return m_background;
     }
 }
 
@@ -178,4 +179,4 @@ float Board::colLocation(float index)
  
 
 
- 
+

@@ -7,8 +7,10 @@
 #include <SFML/Network.hpp>
 #include <iostream>
 
-Toolbar::Toolbar(sf::Texture& pic, sf::Vector2f loc,enum State type)
-	:m_pic(pic), m_position(loc), m_isPressed(false),m_type(type)
+ 
+
+Toolbar::Toolbar(sf::Texture& pic, sf::Vector2f loc,bool mode)
+	:m_pic(pic), m_position(loc), m_isPressed(mode)
 {
 }
 
@@ -32,27 +34,6 @@ sf::Sprite Toolbar::create()
 	
 }
 
-
-
-
-
-
-
-/*
-sf::Sprite MyDraw_07::create() const
-{
-    auto result = sf::Sprite(m_texture);
-    result.setPosition(m_position);
-    result.setRotation(m_rotated ? 90.f : 0.f);
-    result.setOrigin(sf::Vector2f(result.getTexture()->getSize() / 2u));
-    return result;
-}
-*/
-
-
-
-
-
 bool Toolbar::handleClick(int x, int y)
 {
 	std::cout << "fjjjjjj \n";
@@ -73,31 +54,3 @@ bool Toolbar::getIsPressed()
      return m_isPressed; 
 }
 
-State Toolbar::getType()
-{
-	return  m_type;
-}
-
-
-
-//Toolbar Toolbar::create(sf::Vector2f& place, sf::Texture& pic)
-//{
-//    m_sprit.setTexture(pic);
-//    m_sprit.setPosition(place);
-//    return Toolbar();
-//}
-
-//
-//void  Toolbar::initEnemy()
-//{
-//     enemy.setPosition(m_position);
-//     enemy.setSize(sf::Vector2f(100.f, 100.f));
-//     enemy.setFillColor(sf::Color::Cyan);
-//     enemy.setOutlineColor(sf::Color::Blue);
-//     enemy.setOutlineThickness(5.f);
-//
-//    //שינוי הגודל של (enemy)
-//    //enemy.setScale(sf::Vector2f(0.5f, 0.5f));
-//    //enemy.setPosition(sf::Mouse::getPosition(*this->window).x, sf::Mouse::getPosition(*this->window).y);
-//
-//}
