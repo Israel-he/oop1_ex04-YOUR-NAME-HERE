@@ -16,6 +16,23 @@ GameObject::GameObject(sf::Texture& pic, sf::Vector2f pos)
 {
 }
 
+GameObject::GameObject(const GameObject& other)
+    : m_texture(other.m_texture), m_position(other.m_position) {
+}
+
+GameObject& GameObject::operator=(const GameObject& other) {
+    if (this == &other) {
+        return *this;
+    }
+    m_texture = other.m_texture;
+    m_position = other.m_position;
+    return *this;
+}
+
+
+
+
+
 void GameObject::draw(sf::RenderWindow& window)
 {
     window.draw(create());

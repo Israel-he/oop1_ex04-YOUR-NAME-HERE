@@ -11,22 +11,20 @@
 
 Toolbar::Toolbar(sf::Texture& pic)
      :m_pic(pic)
+{  
+	 
+} 
+
+Toolbar::Toolbar(sf::Texture& pic, sf::Vector2f loc )
+	:m_pic(pic), m_position(loc) 
 {
+	 
 }
 
-Toolbar::Toolbar(sf::Texture& pic, sf::Vector2f loc,bool mode)
-	:m_pic(pic), m_position(loc), m_isPressed(mode)
-{
-}
-
-//Toolbar::Toolbar(sf::Texture& texture, sf::Vector2f position)
-//	:m_pic(texture), m_position(position), m_isPressed(false)
-//{
-//}
 
 sf::Sprite Toolbar::returnSprit()
 {
-    return create();
+   return create();
 }
 
 
@@ -41,7 +39,6 @@ sf::Sprite Toolbar::create()
 
 bool Toolbar::handleClick(int x, int y)
 {
-	std::cout << "fjjjjjj \n";
 	if (create().getGlobalBounds().contains(x, y))
 	{
 		return true;
@@ -49,13 +46,18 @@ bool Toolbar::handleClick(int x, int y)
     return false;
 }
 
-void Toolbar::setIsPressed(bool isPressed)
+sf::Vector2f Toolbar::getLoc()
 {
-	m_isPressed = isPressed;
+	return m_position;
 }
 
-bool Toolbar::getIsPressed()
+void Toolbar::deleteTexture()
 {
-     return m_isPressed; 
+	m_pic = sf::Texture();
 }
+ 
+///////////////////////////////
+ 
+
+ 
 

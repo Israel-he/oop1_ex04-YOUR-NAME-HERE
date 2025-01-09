@@ -11,12 +11,14 @@ private:
     sf::Vector2f m_position; // מיקום האובייקט בלוח (x, y)
 	sf::Texture& m_texture;
 
-
-     
+ 
 public:
     GameObject(sf::Texture& pic, sf::Vector2f pos);
-    
 
+    GameObject(const GameObject& other); // Copy constructor
+    GameObject& operator=(const GameObject& other);
+    sf::Texture& getTextur() const { return m_texture; }
+	sf::Vector2f getLoc() const { return m_position; }
     void draw(sf::RenderWindow& window );
     sf::Sprite create();
 

@@ -29,14 +29,22 @@ public:
 	//Render the toolbar
 	void renderToolbar();
 	void initToolbar();
+	void ClearAndcreatWindow();
+
+	//Save and load the board
+	void saveBoardToFile() const;
+	void loadBoardFromFile();
+
 
 	sf::Vector2f  getLoc(sf::Vector2f loc);
 	void addObject(sf::Texture&, sf::Vector2f);
+	void deleteObject(sf::Vector2f loc);
 	sf::Texture& picphoto(int i);
-
+	 
 	//sf::Texture* picphoto(enum State a);
 	float colLocation(float index);
 	void drow(sf::RenderWindow& window);
+
 	
 private:
 
@@ -51,11 +59,14 @@ private:
 	sf::Texture m_Wall;
 	sf::Texture m_trash;
 	sf::Texture m_rock;
-	sf::Texture m_background;
+	sf::Texture m_save;
+	sf::Texture m_door;
+	sf::Texture m_clearPage;
+	 
 	
 
 	//sf::Texture m_empty;
-	std::vector<Toolbar>m_toolbar;
+	std::vector<Toolbar>m_toolbar ;
 	
 	Toolbar* m_need2add; // the object that need to be added to the board
 	
@@ -65,9 +76,9 @@ private:
 
 	//Sprites
 	sf::Sprite sprite;
-
-
-	
+	 
+	bool m_isPressedOnTrash=false;
+	bool m_isRobotAdded; 
 
 	sf::Event ev;
 

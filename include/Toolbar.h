@@ -10,23 +10,19 @@ public:
 
 	 
 	Toolbar(sf::Texture& pic);
-	Toolbar(sf::Texture& pic,sf::Vector2f loc, bool mode= false);
+	Toolbar(sf::Texture& pic,sf::Vector2f loc);
 	sf::Sprite returnSprit();
 	sf::Sprite create();
 	bool handleClick(int x, int y);
-	void setIsPressed(bool isPressed);
+	void setLoc(sf::Vector2f loc) { m_position = loc; }
+	sf::Vector2f getLoc();
 	void setTexture(sf::Texture& pic) { m_pic = pic; }
-	bool getIsPressed();
-	sf::Texture& getTexture() { return m_pic; };//const
-	//State getType();
-	//void draw(sf::RenderWindow& window);
+	sf::Texture& getTexture() const{ return m_pic; };//const
+	void deleteTexture();
+	 
 
 private:
 
 	sf::Texture& m_pic;
-	sf::Vector2f m_position;
-	bool m_isPressed; 
-	
-	
-	
+	sf::Vector2f m_position;	
 };
